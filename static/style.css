@@ -8,12 +8,24 @@ body {
 
 /* Контейнер для всей страницы */
 .container {
+    display: flex;
+    gap: 20px;
     width: 80%;
     margin: 40px auto;
     background: white;
     padding: 20px 40px;
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+
+.left-panel {
+    flex: 1;             /* левая панель занимает меньше места */
+}
+
+.right-panel {
+    flex: 2;             /* правая панель занимает больше места */
+    padding-left: 20px;
 }
 
 /* Заголовок */
@@ -30,6 +42,7 @@ form {
 
 input[type="text"],
 textarea {
+    resize: none;
     width: 100%;
     padding: 10px;
     margin-top: 6px;
