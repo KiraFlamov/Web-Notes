@@ -1,0 +1,116 @@
+/* ====== ОБЩИЕ НАСТРОЙКИ ====== */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f7f9fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Контейнер для всей страницы */
+.container {
+    width: 80%;
+    margin: 40px auto;
+    background: white;
+    padding: 20px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* ====== ФОРМА ДОБАВЛЕНИЯ ====== */
+form {
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+/* ====== КНОПКИ ====== */
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+button[type="submit"]:disabled {
+    opacity: 0.5;
+}
+
+/* ====== СПИСОК ЗАМЕТОК ====== */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.1);
+}
+
+li h3 {
+    margin: 0;
+    color: #222;
+}
+
+li p {
+    margin-top: 5px;
+    margin-bottom: 8px;
+}
+
+small {
+    color: #666;
+}
+
+/* ====== ПОИСК ====== */
+.search-box {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 250px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+/* ====== ВЕРХНЯЯ КНОПКА ====== */
+.top-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ====== РАЗМЕТКА ====== */
+hr {
+    margin: 25px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
