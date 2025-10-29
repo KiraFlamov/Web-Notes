@@ -77,4 +77,4 @@ def search():
     return render_template("index.html", notes=results, search=True, query=request.args.get("query", ""), number_of_queries = len(results))
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(debug=True)
