@@ -8,7 +8,21 @@
 <body>
     <h1>__ЗаМеТоЧкИ__</h1>
 
-    <hr>
+    <!-- Форма для уведомлений -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">{{ messages[0] }}</div>
+            <script>
+                const note = document.querySelector('.notification');
+                if (note) {
+                    note.classList.add('show'); // делаем видимым
+                    setTimeout(() => {
+                      note.classList.remove('show'); // <скрываем></скрываем>
+                    }, 1500); // через 1.5 секунды
+                }
+            </script>
+        {% endif %}
+    {% endwith %}
 
     <div class="container">
         <div class="left-panel">
@@ -16,22 +30,18 @@
             <h3>Найти заметку:</h3>
             <form action="{{ url_for('search') }}" method="get">
                 <input type="text" id="search-input" name="query" placeholder="Поиск заметок..." value="{{ query }}" required>
-                <button type="button" onclick="document.getElementById('search-input').value = '';">Очистить</button>
-                <br>
-                <br>
-                <button type="submit">Поиск</button>
+                <!--<button type="button" onclick="document.getElementById('search-input').value = '';">Очистить</button>*-->
+                <button type="submit" style="float: left";>Поиск</button>
             </form>
 
-            <hr>
-
+            <br>
+            <br>
             <!-- Форма для добавления -->
             <h3>Добавить заметку:</h3>
+
             <form action="{{ url_for('add') }}" method="post">
                 <input type="text" name="title" placeholder="Заголовок" required>
-                <br>
-                <br>
-                <textarea name="content" placeholder="Содержание" required></textarea>
-                <br>
+                <textarea class="content-textarea" name="content" placeholder="Содержание" required></textarea>
                 <button type="submit">Добавить</button>
             </form>
         </div>
@@ -44,33 +54,44 @@
                 <h3>Результаты поиска для "{{ query }}"</h3>
                 <p>Найдено заметок: {{ number_of_queries }}</p>
                 <form action="{{ url_for('index') }}" method="get">
-                    <button type="submit">Вернуться к списку заметок</button>
+                    <button type="submit">Назад</button>
                 </form>
             {% endif %}
 
             <!-- Список заметок -->
             {% if notes %}
-                <ul>
-                    {% for note in notes %}
-                        <li>
-                            <h3>{{ note.title }}</h3>
-                            <p>{{ note.content }}</p>
-                            <small>Создано: {{ note.created }} | Обновлено: {{ note.updated }}</small>
 
-                             <!-- Кнопка удаления -->
-                            <form action="{{ url_for('delete', note_id=note.id) }}" method="post" style="display:inline;">
-                                <button type="submit" onclick="return confirm('Удалить заметку?');">Удалить</button>
-                            </form>
+            <div class="sort-toggle">
+                {% if sort_order == "asc" %}
+                    <a href="{{ url_for('index', sort='desc') }}">Сначала старые</a>
+                {% else %}
+                    <a href="{{ url_for('index', sort='asc') }}">Сначала новые</a>
+                {% endif %}
+            </div>
+                <div class="notes-list">
+                    <ul>
+                        {% for note in notes %}
+                            <li>
+                                <h3>{{ note.title }}</h3>
+                                <p>{{ note.content }}</p>
 
-
-                            <form action="{{ url_for('edit', note_id=note.id) }}" method="get" style="display:inline;">
-                                <button type="submit">Изменить</button>
-                            </form>
-
-                        </li>
-                    {% endfor %}
-                </ul>
-
+                                <div class="note-footer">
+                                    <small class="note-date">Создано: {{ note.created }} | Обновлено: {{ note.updated }}</small>
+                                    <div class="note-buttons">
+                                        <!-- Кнопка удаления -->
+                                        <form action="{{ url_for('delete', note_id=note.id) }}" method="post">
+                                            <button type="submit" onclick="return confirm('Удалить заметку?')">Удалить</button>
+                                        </form>
+                                        <!-- Кнопка редактирования -->
+                                        <form action="{{ url_for('edit', note_id=note.id) }}" method="get">
+                                            <button type="submit">Изменить</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% else %}
                 {% if search %}
                 {% else %}
@@ -78,5 +99,6 @@
                 {% endif %}
             {% endif %}
         </div>
+    </div>
 </body>
 </html>

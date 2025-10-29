@@ -11,7 +11,7 @@ body {
     display: flex;
     gap: 20px;
     width: 80%;
-    margin: 40px auto;
+    margin: 0 auto;
     background: white;
     padding: 20px 40px;
     border-radius: 12px;
@@ -25,7 +25,6 @@ body {
 
 .right-panel {
     flex: 2;             /* правая панель занимает больше места */
-    padding-left: 20px;
 }
 
 /* Заголовок */
@@ -35,14 +34,10 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* ====== ФОРМА ДОБАВЛЕНИЯ ====== */
-form {
-    margin-bottom: 20px;
-}
-
 input[type="text"],
 textarea {
-    resize: none;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    resize: vertical;
     width: 100%;
     padding: 10px;
     margin-top: 6px;
@@ -52,31 +47,88 @@ textarea {
     box-sizing: border-box;
     font-size: 16px;
 }
+.content-textarea{
+    height: 200px;
+}
 
 /* ====== КНОПКИ ====== */
 button {
+    width: 110px;
+    display: inline;
+    height: 35px;
     background-color: #4CAF50;
     color: white;
     border: none;
     padding: 8px 15px;
     border-radius: 6px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 5px;
+    margin-right: 6px;
+    margin-top: 6px;
+    margin-bottom: 10px;
 }
+
+.note-footer {
+    display: flex;                /* горизонтальное расположение */
+    justify-content: space-between; /* дата слева, кнопки справа */
+    align-items: center;          /* вертикальное выравнивание по центру */
+    margin-top: 10px;
+}
+
+.note-buttons {
+    display: flex;               /* кнопки рядом друг с другом */
+    gap: 10px;                   /* расстояние между кнопками */
+}
+
+.note-buttons button {
+    min-width: 80px;             /* минимальная ширина */
+    max-width: 120px;            /* максимальная ширина */
+    flex: 1 1 auto;              /* кнопки растягиваются в пределах блока */
+}
+
 
 button:hover {
     background-color: #45a049;
+    transform: scale(1.05);  /* слегка увеличивается */
+    transition: all 0.3s;    /* плавный переход */
+
 }
 
 button[type="submit"]:disabled {
     opacity: 0.5;
 }
 
+.sort-toggle a {
+    text-decoration: none;
+    color: #4CAF50;
+    padding: 4px 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sort-toggle a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
 /* ====== СПИСОК ЗАМЕТОК ====== */
+
+.notes-list {
+    max-height: 550px;   /* фиксированная высота блока */
+    overflow-y: auto;    /* вертикальная полоса прокрутки, если содержимого больше */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+
 ul {
     list-style-type: none;
     padding: 0;
+    overflow-y: auto;
 }
 
 li {
@@ -85,6 +137,7 @@ li {
     padding: 15px;
     margin-bottom: 15px;
     box-shadow: 0 0 4px rgba(0,0,0,0.1);
+    overflow-wrap: anywhere;     /* перенос текста где угодно */
 }
 
 li h3 {
@@ -126,4 +179,26 @@ hr {
     margin: 25px 0;
     border: none;
     border-top: 1px solid #ddd;
+}
+
+/* ====== Уведомления ====== */
+.notification {
+    position: fixed;       /* фиксируем относительно окна браузера */
+    top: 20px;             /* отступ от верха страницы */
+    left: 40%;             /* по центру горизонтально */
+    background-color: #4CAF50;  /* зелёный фон */
+    color: white;               /* белый текст */
+    padding: 10px 15px;         /* внутренние отступы */
+    border-radius: 6px;         /* скругление углов */
+    margin-bottom: 20px;        /* отступ снизу от других элементов */
+    text-align: center;          /* текст по центру */
+    font-weight: bold;           /* жирный текст */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* лёгкая тень для объёма */
+    opacity: 0;               /* начальная прозрачность */
+    transform: translateY(-10px); /* чуть сдвинут вверх */
+    transition: opacity 0.5s, transform 0.5s; /* плавный переход */
+}
+.notification.show {
+    opacity: 1;               /* видимость */
+    transform: translateY(0); /* возвращаем на место */
 }

@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактировать заметку</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Редактировать заметку</h1>
+    <div class="container" style="display:block">
+        <form method="post">
+            <input type="text" name="title" value="{{ note.title }}" required>
+            <textarea class="content-textarea" name="content" required>{{ note.content }}</textarea>
+            <button type="submit">Сохранить</button>
+        </form>
 
-    <form method="post">
-        <input type="text" name="title" value="{{ note.title }}" required>
-        <br>
-        <textarea name="content" required>{{ note.content }}</textarea>
-        <br>
-        <button type="submit">Сохранить</button>
-    </form>
 
-    <p><a href="{{ url_for('index') }}">← Назад к списку</a></p>
+        <form action="{{ url_for('index') }}" method="get">
+            <button type="submit">← Назад</button>
+        </form>
+    </div>
 </body>
 </html>

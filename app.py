@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, get_flashed_messages
 import json
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = "1"
 
 def load_notes():
     try:
@@ -18,8 +19,10 @@ def save_notes(notes):
 
 @app.route("/")
 def index():
+    sort_order = request.args.get("sort", "asc")  # получаем параметр сортировки, по умолчанию "asc"
     notes = load_notes()
-    return render_template("index.html", notes=notes)
+    notes.sort(key=lambda x: x["updated"], reverse=(sort_order == "desc"))
+    return render_template("index.html", notes=notes, sort_order=sort_order)
 
 @app.route("/add", methods=["POST"])
 def add():
@@ -36,6 +39,7 @@ def add():
         'updated': now
     })
     save_notes(notes)
+    flash("Заметка успешно сохранена!")
     return redirect(url_for("index"))
 
 @app.route("/delete/<int:note_id>", methods=["POST"])
@@ -44,6 +48,7 @@ def delete(note_id):
     notes = load_notes()
     new_notes = [note for note in notes if note['id'] != note_id]
     save_notes(new_notes)
+    flash('Заметка удалена!')
     return redirect(url_for("index"))
 
 @app.route("/edit/<int:note_id>", methods=["GET", "POST"])
@@ -59,6 +64,7 @@ def edit(note_id):
         note["content"] = request.form.get("content")
         note["updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         save_notes(notes)
+        flash("Заметка успешно сохранена!")
         return redirect(url_for("index"))
 
     return render_template("edit.html", note=note)
