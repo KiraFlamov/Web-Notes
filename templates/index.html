@@ -62,12 +62,22 @@
             {% if notes %}
 
             <div class="sort-toggle">
-                {% if sort_order == "asc" %}
-                    <a href="{{ url_for('index', sort='desc') }}">Сначала старые</a>
+                {% if search %}
+                    {% if sort_order == "asc" %}
+                        <a href="{{ url_for('search', query=query, sort='desc') }}">Сначала старые</a>
+                    {% else %}
+                        <a href="{{ url_for('search', query=query, sort='asc') }}">Сначала новые</a>
+                    {% endif %}
                 {% else %}
-                    <a href="{{ url_for('index', sort='asc') }}">Сначала новые</a>
+                    {% if sort_order == "asc" %}
+                        <a href="{{ url_for('index', sort='desc') }}">Сначала старые</a>
+                    {% else %}
+                        <a href="{{ url_for('index', sort='asc') }}">Сначала новые</a>
+                    {% endif %}
                 {% endif %}
             </div>
+
+
                 <div class="notes-list">
                     <ul>
                         {% for note in notes %}
