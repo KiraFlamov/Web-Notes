@@ -1,0 +1,102 @@
+/* ====== ОБЩИЕ НАСТРОЙКИ ====== */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f7f9fc;
+    margin: 10;           /* исправлено: убираем 10 */
+    display: flex;
+    justify-content: center; /* по горизонтали */
+    align-items: center;     /* по вертикали */
+    height: 80vh;           /* 100% высоты окна */
+    flex-direction: column;  /* элементы внутри будут вертикально один под другим */
+}
+
+
+
+/* Заголовок */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 91%;
+    height: 20px;
+    padding: 15px 25px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+
+
+/* ====== КНОПКИ ====== */
+button {
+    width: 200px;
+    height: 40px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.buttons_row {
+    display: flex;
+    justify-content: center;   /* центрируем кнопки */
+    align-items: center;
+    gap: 145px;                 /* расстояние между ними */
+    margin-top: 20px;
+}
+
+
+button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);  /* слегка увеличивается */
+    transition: all 0.3s;    /* плавный переход */
+}
+
+a {
+    display: inline-block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;       /* выравнивание текста по вертикали */
+    text-align: center;
+    color: #4CAF50;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+/* ====== Уведомления ====== */
+.notification {
+    position: fixed;       /* фиксируем относительно окна браузера */
+    top: 20px;             /* отступ от верха страницы */
+    left: 40%;             /* по центру горизонтально */
+    background-color: #4CAF50;  /* зелёный фон */
+    color: white;               /* белый текст */
+    padding: 10px 15px;         /* внутренние отступы */
+    border-radius: 6px;         /* скругление углов */
+    margin-bottom: 20px;        /* отступ снизу от других элементов */
+    text-align: center;          /* текст по центру */
+    font-weight: bold;           /* жирный текст */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* лёгкая тень для объёма */
+    opacity: 0;               /* начальная прозрачность */
+    transform: translateY(-10px); /* чуть сдвинут вверх */
+    transition: opacity 0.5s, transform 0.5s; /* плавный переход */
+}
+.notification.show {
+    opacity: 1;               /* видимость */
+    transform: translateY(0); /* возвращаем на место */
+}

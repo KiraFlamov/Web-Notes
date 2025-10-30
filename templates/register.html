@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_registr.css') }}">
+</head>
+
+<body>
+    <h1>Регистрация</h1>
+    <!-- Форма для уведомлений -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">{{ messages[0] }}</div>
+            <script>
+                const note = document.querySelector('.notification');
+                if (note) {
+                    note.classList.add('show'); // делаем видимым
+                    setTimeout(() => {
+                      note.classList.remove('show'); // <скрываем></скрываем>
+                    }, 1500); // через 1.5 секунды
+                }
+            </script>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <input name="username" placeholder="Имя пользователя" required>
+        <input name="password" type="password" placeholder="Пароль" required>
+        <div class="buttons_row">
+            <a href="{{ url_for('login') }}">Уже есть аккаунт? Войти</a>
+            <button type="submit">Создать аккаунт</button>
+        </div>
+    </form>
+
+</body>
+</html>

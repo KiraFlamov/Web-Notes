@@ -2,7 +2,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: #f7f9fc;
-    margin: 0;
+    margin: 10;
     padding: 0;
 }
 
@@ -34,8 +34,7 @@ h1 {
     margin-bottom: 30px;
 }
 
-input[type="text"],
-textarea {
+input, textarea {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     resize: vertical;
     width: 100%;
@@ -50,6 +49,7 @@ textarea {
 .content-textarea{
     height: 200px;
 }
+
 
 /* ====== КНОПКИ ====== */
 button {
@@ -69,14 +69,14 @@ button {
 
 .note-footer {
     display: flex;                /* горизонтальное расположение */
-    justify-content: space-between; /* дата слева, кнопки справа */
+    justify-content: space-between;
     align-items: center;          /* вертикальное выравнивание по центру */
     margin-top: 10px;
 }
 
 .note-buttons {
     display: flex;               /* кнопки рядом друг с другом */
-    gap: 10px;                   /* расстояние между кнопками */
+    gap: 100px;                   /* расстояние между кнопками */
 }
 
 .note-buttons button {
@@ -109,6 +109,33 @@ button[type="submit"]:disabled {
 .sort-toggle a:hover {
     background-color: #4CAF50;
     color: white;
+}
+
+a {
+    text-decoration: none;
+    color: #4CAF50;
+    padding: 10px 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.exit {
+    display: inline-block;
+    text-decoration: none;
+    color: #4CAF50;
+    padding: 5px 5px;
+    width: 90px;
+    height: 20px;
+    text-align: center;
+    border: 1px solid #4CAF50;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* ====== СПИСОК ЗАМЕТОК ====== */
