@@ -13,8 +13,7 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.login_view = 'login'  # Если неавторизованный пользователь попытается попасть на защищённую страницу — его перекинет на /login
 login_manager.init_app(app)
-login_manager.login_message = None
-
+login_manager.login_message = None #чтобы при переходе не было уведомления Please log in to access this page.
 
 
 
@@ -116,6 +115,10 @@ def register():
             flash("Такой пользователь уже существует!")
             return redirect(url_for("register"))
 
+        if len(password) < 8:
+            flash("Длина пароля должна быть от 8 символов!")
+            return redirect(url_for("register"))
+
         hashed_pw = generate_password_hash(password, method='pbkdf2:sha256')
         new_user = User(username=username, password=hashed_pw)
         db.session.add(new_user)
@@ -149,5 +152,8 @@ def logout():
     return redirect(url_for("login"))
 
 
+#if __name__ == "__main__":
+#    app.run(host = "0.0.0.0", port = 10000)
+
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = 10000)
+    app.run(debug=True)

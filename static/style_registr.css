@@ -2,7 +2,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: #f7f9fc;
-    margin: 10;           /* исправлено: убираем 10 */
+    margin: 10;
     display: flex;
     justify-content: center; /* по горизонтали */
     align-items: center;     /* по вертикали */
@@ -20,13 +20,14 @@ h1 {
 }
 
 input {
-    width: 91%;
-    height: 20px;
-    padding: 15px 25px;
+    width: 100%;
+    height: 50px;
+    padding: 0 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 18px;
     margin: 5px 0;
+    box-sizing: border-box; /* учитывает padding */
 }
 
 
@@ -99,4 +100,41 @@ a:hover {
 .notification.show {
     opacity: 1;               /* видимость */
     transform: translateY(0); /* возвращаем на место */
+}
+
+
+
+.password-row {
+    position: relative; /* нужно, чтобы позиционировать кнопку внутри */
+    width: 100%;
+    margin: 5px 0;
+}
+
+.password-row input {
+    padding-right: 50px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    width: 5%;
+    transform: translateY(-50%);
+    background: none;         /* убираем фон */
+    border: none;             /* без рамки */
+    cursor: pointer;
+    font-size: 22px;
+    color: #555;              /* цвет иконки */
+    transition: color 0.2s, transform 0.1s; /* плавное изменение цвета и масштаба */
+}
+
+.toggle-password:hover {
+    color: #4CAF50;           /* зелёный при наведении */
+    background: none;         /* убираем фон */
+    border: none;             /* без рамки */
+    transform: translateY(-50%);
+}
+
+.toggle-password:active {
+    transform: translateY(-50%) scale(1.5); /* слегка увеличиваем кнопку */
 }

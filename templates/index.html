@@ -64,15 +64,15 @@
             <div class="sort-toggle">
                 {% if search %}
                     {% if sort_order == "asc" %}
-                        <a href="{{ url_for('search', query=query, sort='desc') }}">Сначала старые</a>
+                        <a href="{{ url_for('search', query=query, sort='desc') }}">Сначала новые</a>
                     {% else %}
-                        <a href="{{ url_for('search', query=query, sort='asc') }}">Сначала новые</a>
+                        <a href="{{ url_for('search', query=query, sort='asc') }}">Сначала старые</a>
                     {% endif %}
                 {% else %}
                     {% if sort_order == "asc" %}
-                        <a href="{{ url_for('index', sort='desc') }}">Сначала старые</a>
+                        <a href="{{ url_for('index', sort='desc') }}">Сначала новые</a>
                     {% else %}
-                        <a href="{{ url_for('index', sort='asc') }}">Сначала новые</a>
+                        <a href="{{ url_for('index', sort='asc') }}">Сначала старые</a>
                     {% endif %}
                 {% endif %}
             </div>

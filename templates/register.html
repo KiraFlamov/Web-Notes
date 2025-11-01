@@ -26,12 +26,31 @@
 
     <form method="POST">
         <input name="username" placeholder="Имя пользователя" required>
-        <input name="password" type="password" placeholder="Пароль" required>
+        <input type="password" id="password" name="password" placeholder="Пароль" required>
+        <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
         <div class="buttons_row">
             <a href="{{ url_for('login') }}">Уже есть аккаунт? Войти</a>
             <button type="submit">Создать аккаунт</button>
         </div>
     </form>
+
+
+
+    <!-- Отображение пароля -->
+    <script>
+    function togglePassword() {
+      const passwordField = document.getElementById("password");
+      const toggleButton = document.querySelector(".toggle-password");
+
+      if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleButton.textContent = "🙈";  // меняем иконку
+      } else {
+        passwordField.type = "password";
+        toggleButton.textContent = "👁";
+      }
+    }
+    </script>
 
 </body>
 </html>
