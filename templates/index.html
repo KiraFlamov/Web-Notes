@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <title>Заметки</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
+
 <body>
-    <h1>__ЗаМеТоЧкИ__</h1>
+    <h1>Мои заметки</h1>
 
     <!-- Форма для уведомлений -->
     {% with messages = get_flashed_messages() %}
@@ -40,6 +42,7 @@
             <h3>Добавить заметку:</h3>
 
             <form action="{{ url_for('add') }}" method="post">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="text" name="title" placeholder="Заголовок" required>
                 <textarea class="content-textarea" name="content" placeholder="Содержание" required></textarea>
                 <button type="submit">Добавить</button>
@@ -88,13 +91,14 @@
                                 <div class="note-footer">
                                     <small class="note-date">Создано: {{ note.created }} | Обновлено: {{ note.updated }}</small>
                                     <div class="note-buttons">
-                                        <!-- Кнопка удаления -->
-                                        <form action="{{ url_for('delete', note_id=note.id) }}" method="post">
-                                            <button type="submit" onclick="return confirm('Удалить заметку?')">Удалить</button>
-                                        </form>
                                         <!-- Кнопка редактирования -->
                                         <form action="{{ url_for('edit', note_id=note.id) }}" method="get">
                                             <button type="submit">Изменить</button>
+                                        </form>
+                                        <!-- Кнопка удаления -->
+                                        <form action="{{ url_for('delete', note_id=note.id) }}" method="post">
+                                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                            <button type="submit" onclick="return confirm('Удалить заметку?')">Удалить</button>
                                         </form>
                                     </div>
                                 </div>

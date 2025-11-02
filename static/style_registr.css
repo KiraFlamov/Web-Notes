@@ -1,7 +1,7 @@
 /* ====== ОБЩИЕ НАСТРОЙКИ ====== */
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #f7f9fc;
+    background-color: #E6DAB3;
     margin: 10;
     display: flex;
     justify-content: center; /* по горизонтали */
@@ -25,7 +25,7 @@ input {
     padding: 0 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    font-size: 18px;
+    font-size: 16px;
     margin: 5px 0;
     box-sizing: border-box; /* учитывает padding */
 }
@@ -33,7 +33,7 @@ input {
 
 
 /* ====== КНОПКИ ====== */
-button {
+.buttons {
     width: 200px;
     height: 40px;
     background-color: #4CAF50;
@@ -54,7 +54,7 @@ button {
 }
 
 
-button:hover {
+.buttons:hover {
     background-color: #45a049;
     transform: scale(1.05);  /* слегка увеличивается */
     transition: all 0.3s;    /* плавный переход */
@@ -67,16 +67,14 @@ a {
     line-height: 40px;       /* выравнивание текста по вертикали */
     text-align: center;
     color: #4CAF50;
-    border: 1px solid #4CAF50;
     border-radius: 6px;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
 }
 
 a:hover {
-    background-color: #4CAF50;
-    color: white;
+    color: #46d83b;
 }
 
 
@@ -119,20 +117,17 @@ a:hover {
     right: 15px;
     top: 50%;
     width: 5%;
-    transform: translateY(-50%);
     background: none;         /* убираем фон */
     border: none;             /* без рамки */
     cursor: pointer;
     font-size: 22px;
     color: #555;              /* цвет иконки */
     transition: color 0.2s, transform 0.1s; /* плавное изменение цвета и масштаба */
+    transform: translateY(-50%)
 }
 
 .toggle-password:hover {
     color: #4CAF50;           /* зелёный при наведении */
-    background: none;         /* убираем фон */
-    border: none;             /* без рамки */
-    transform: translateY(-50%);
 }
 
 .toggle-password:active {

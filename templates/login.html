@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Авторизация</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style_registr.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
 </head>
 
 <body>
@@ -25,6 +26,7 @@
     {% endwith %}
 
     <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input name="username" placeholder="Имя пользователя" required>
         <div class="password-row">
             <input type="password" id="password" name="password" placeholder="Пароль" required>
@@ -32,7 +34,7 @@
         </div>
         <div class="buttons_row">
             <a href="{{ url_for('register') }}">Зарегистрироваться</a>
-            <button type="submit">Войти</button>
+            <button class="buttons" type="submit">Войти</button>
         </div>
     </form>
 

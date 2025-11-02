@@ -3,10 +3,12 @@ from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_wtf.csrf import CSRFProtect
 
 
 app = Flask(__name__)
-app.secret_key = "1"
+app.secret_key = "secret_key_wow"
+csrf = CSRFProtect(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///notes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
@@ -26,9 +28,9 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
     content = db.Column(db.Text, nullable=False)
-    created = db.Column(db.String(50))
-    updated = db.Column(db.String(50))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    created = db.Column(db.String(50), nullable=False)
+    updated = db.Column(db.String(50), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -42,6 +44,7 @@ def index():
     return render_template("index.html", notes=notes, sort_order=sort_order, user=current_user)
 
 @app.route("/add", methods=["POST"])
+@login_required
 def add():
     title = request.form.get("title")
     content = request.form.get("content")
@@ -53,6 +56,7 @@ def add():
     return redirect(url_for("index"))
 
 @app.route("/delete/<int:note_id>", methods=["POST"])
+@login_required
 def delete(note_id):
     note = Note.query.get(note_id)
     if note:
@@ -62,6 +66,7 @@ def delete(note_id):
     return redirect(url_for("index"))
 
 @app.route("/edit/<int:note_id>", methods=["GET", "POST"])
+@login_required
 def edit(note_id):
     note = Note.query.get(note_id)
     if not note:
@@ -78,6 +83,7 @@ def edit(note_id):
     return render_template("edit.html", note=note)
 
 @app.route("/search", methods=["GET"])
+@login_required
 def search():
     query = request.args.get("query", "").lower()
     sort_order = request.args.get("sort", "asc")  # добавляем параметр сортировки
@@ -124,7 +130,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         flash("Регистрация успешна! Теперь войдите.")
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
 
     return render_template("register.html")
 
