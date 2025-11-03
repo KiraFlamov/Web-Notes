@@ -2,11 +2,10 @@
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: #E6DAB3;
-    margin: 10;
     display: flex;
     justify-content: center; /* по горизонтали */
     align-items: center;     /* по вертикали */
-    height: 80vh;           /* 100% высоты окна */
+    min-height: 90vh;           /* 100% высоты окна */
     flex-direction: column;  /* элементы внутри будут вертикально один под другим */
 }
 
@@ -30,6 +29,11 @@ input {
     box-sizing: border-box; /* учитывает padding */
 }
 
+input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.5);
+}
 
 
 /* ====== КНОПКИ ====== */
@@ -42,15 +46,12 @@ input {
     border-radius: 6px;
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .buttons_row {
-    display: flex;
-    justify-content: center;   /* центрируем кнопки */
-    align-items: center;
-    gap: 145px;                 /* расстояние между ними */
-    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
 
@@ -109,18 +110,18 @@ a:hover {
 }
 
 .password-row input {
-    padding-right: 50px;
+    padding-right: 40px;
 }
 
 .toggle-password {
     position: absolute;
-    right: 15px;
+    right: 10px;
     top: 50%;
-    width: 5%;
-    background: none;         /* убираем фон */
+    width: width: 30px;
+    background: transparent;         /* прозрачный фон */
     border: none;             /* без рамки */
     cursor: pointer;
-    font-size: 22px;
+    font-size: 20px;
     color: #555;              /* цвет иконки */
     transition: color 0.2s, transform 0.1s; /* плавное изменение цвета и масштаба */
     transform: translateY(-50%)

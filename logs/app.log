@@ -1,0 +1,148 @@
+2025-11-03 13:41:27,585 - INFO - Приложение запущено
+2025-11-03 13:41:28,533 - INFO - Приложение запущено
+2025-11-03 13:41:35,034 - INFO - User 'test' вышел из системы
+2025-11-03 13:42:03,443 - INFO - User 'test' вошёл в систему
+2025-11-03 13:45:44,361 - INFO - Приложение запущено
+2025-11-03 13:45:45,363 - INFO - Приложение запущено
+2025-11-03 13:45:46,815 - INFO - User 'test' вышел из системы
+2025-11-03 13:47:08,960 - INFO - Приложение запущено
+2025-11-03 13:47:22,292 - INFO - User 'etststt' вошёл в систему
+2025-11-03 13:47:55,016 - INFO - Приложение запущено
+2025-11-03 13:47:58,897 - INFO - User 'улоои' зарегистрировался
+2025-11-03 13:50:14,483 - INFO - Приложение запущено
+2025-11-03 13:50:15,442 - INFO - Приложение запущено
+2025-11-03 13:50:58,016 - INFO - User '19' зарегистрировался
+2025-11-03 13:53:35,694 - INFO - Приложение запущено
+2025-11-03 13:53:40,658 - INFO - User 'test' вошёл в систему
+2025-11-03 13:54:02,844 - INFO - User 'test' отредактировал заметку '7' (ID 11)
+2025-11-03 13:54:15,886 - INFO - User 'test' удалил заметку '7' (ID 11)
+2025-11-03 13:54:26,840 - INFO - User 'test' создал заметку 'dd'
+2025-11-03 13:55:20,359 - INFO - User 'test' вышел из системы
+2025-11-03 13:57:15,495 - INFO - Приложение запущено
+2025-11-03 13:57:53,589 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /цлоуаидоцуаор
+2025-11-03 13:58:18,302 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /i will fuck your mum
+2025-11-03 13:58:33,647 - INFO - User 'test' вошёл в систему
+2025-11-03 13:59:19,287 - INFO - User 'test' вышел из системы
+2025-11-03 13:59:25,601 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /edit.2
+2025-11-03 14:00:56,630 - INFO - Приложение запущено
+2025-11-03 14:02:13,073 - INFO - Приложение запущено
+2025-11-03 14:02:13,912 - ERROR - Exception on /cause_error [GET]
+Traceback (most recent call last):
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\PYTHON PROJECTS\notes-web\app.py", line 216, in cause_error
+    1 / 0  # Деление на ноль вызывает исключение
+    ~~^~~
+ZeroDivisionError: division by zero
+2025-11-03 14:02:13,916 - ERROR - 500 Internal Server Error - User 'Anonymous' вызвал ошибку на /cause_error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-03 14:02:29,613 - ERROR - Exception on /cause_error [GET]
+Traceback (most recent call last):
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "D:\PYTHON PROJECTS\.venv\Lib\site-packages\flask\app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "D:\PYTHON PROJECTS\notes-web\app.py", line 216, in cause_error
+    1 / 0  # Деление на ноль вызывает исключение
+    ~~^~~
+ZeroDivisionError: division by zero
+2025-11-03 14:02:29,616 - ERROR - 500 Internal Server Error - User 'Anonymous' вызвал ошибку на /cause_error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.
+2025-11-03 14:03:32,164 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /admin
+2025-11-03 14:04:17,318 - INFO - User 'test' вошёл в систему
+2025-11-03 14:04:20,448 - ERROR - 404 Not Found - User 'test' попытался зайти на /admin
+2025-11-03 14:05:20,800 - ERROR - 404 Not Found - User 'test' попытался зайти на /admin
+2025-11-03 14:07:28,935 - INFO - User 'test' вышел из системы
+2025-11-03 14:07:37,919 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /cause_403
+2025-11-03 14:08:16,873 - INFO - User 'test' вошёл в систему
+2025-11-03 14:08:21,438 - ERROR - 404 Not Found - User 'test' попытался зайти на /cause_403
+2025-11-03 14:13:34,203 - ERROR - 404 Not Found - User 'test' попытался зайти на /cause_403
+2025-11-03 14:13:39,013 - INFO - User 'test' вышел из системы
+2025-11-03 14:13:46,655 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /login/cause_403
+2025-11-03 14:14:31,099 - INFO - User 'test' вошёл в систему
+2025-11-03 14:14:34,537 - ERROR - 404 Not Found - User 'test' попытался зайти на /cause_403
+2025-11-03 18:17:05,862 - INFO - Приложение запущено
+2025-11-03 18:19:40,126 - INFO - User 'test' вышел из системы
+2025-11-03 18:20:55,002 - INFO - User 'eliconda espressino' вошёл в систему
+2025-11-03 18:22:02,240 - INFO - User 'eliconda espressino' создал заметку 'i am the best tattoo master'
+2025-11-03 18:23:19,934 - INFO - User 'eliconda espressino' создал заметку 'euecm'
+2025-11-03 18:24:23,919 - INFO - User 'eliconda espressino' удалил заметку 'пинаю пикми хуи' (ID 1)
+2025-11-03 18:24:30,445 - INFO - User 'eliconda espressino' вышел из системы
+2025-11-03 18:25:39,187 - INFO - User 'ш' зарегистрировался
+2025-11-03 18:28:26,156 - INFO - User 'test' вошёл в систему
+2025-11-03 21:04:05,357 - INFO - Приложение запущено
+2025-11-03 21:04:06,259 - INFO - Приложение запущено
+2025-11-03 21:04:12,882 - WARNING - Неавторизованный пользователь попытался зайти на /
+2025-11-03 21:04:16,037 - WARNING - Неавторизованный пользователь попытался зайти на /
+2025-11-03 21:04:19,587 - WARNING - Неавторизованный пользователь попытался зайти на /
+2025-11-03 21:04:22,577 - WARNING - Неавторизованный пользователь попытался зайти на /
+2025-11-03 21:04:31,621 - WARNING - Неавторизованный пользователь попытался зайти на /
+2025-11-03 21:04:48,883 - INFO - Приложение запущено
+2025-11-03 21:05:18,397 - INFO - User 'test' вошёл в систему
+2025-11-03 21:13:08,262 - INFO - Приложение запущено
+2025-11-03 21:15:14,495 - INFO - Приложение запущено
+2025-11-03 21:15:21,477 - ERROR - 403 Forbidden - User 'test' попытался зайти на /cause_403
+2025-11-03 21:19:26,320 - INFO - Приложение запущено в debug=False
+2025-11-03 21:21:28,237 - INFO - Приложение запущено в debug=False
+2025-11-03 21:21:29,068 - INFO - Приложение запущено в debug=False
+2025-11-03 21:21:52,387 - INFO - User 'test' вышел из системы
+2025-11-03 21:23:31,526 - INFO - Приложение запущено в debug=False
+2025-11-03 21:23:32,473 - INFO - Приложение запущено в debug=False
+2025-11-03 21:25:06,054 - INFO - Приложение запущено в debug=False
+2025-11-03 21:26:24,986 - INFO - Приложение запущено в debug=False
+2025-11-03 21:29:13,280 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /favicon.ico
+2025-11-03 21:29:13,321 - ERROR - 404 Not Found - User 'Anonymous' попытался зайти на /favicon.ico
+2025-11-03 21:29:41,198 - INFO - User 'test' вошёл в систему
+2025-11-03 21:30:08,226 - ERROR - 403 Forbidden - User 'test' попытался зайти на /edit/3
+2025-11-03 21:31:23,887 - INFO - User 'test' вышел из системы
+2025-11-03 21:33:01,927 - INFO - User 'test' вошёл в систему
+2025-11-03 21:33:44,564 - ERROR - 403 Forbidden - User 'test' попытался зайти на /edit/1
+2025-11-03 21:34:01,709 - ERROR - 403 Forbidden - User 'test' попытался зайти на /edit/399
+2025-11-03 21:34:12,977 - ERROR - 404 Not Found - User 'test' попытался зайти на /efwer
+2025-11-03 21:34:26,545 - ERROR - 404 Not Found - User 'test' попытался зайти на /delete
+2025-11-03 21:37:40,995 - INFO - Приложение запущено в debug=False
+2025-11-03 21:37:50,416 - INFO - Приложение запущено в debug=False
+2025-11-03 21:38:21,516 - INFO - Приложение запущено в debug=False
+2025-11-03 21:38:22,554 - INFO - Приложение запущено в debug=False
+2025-11-03 21:38:24,754 - ERROR - 404 Not Found - User 'test' попытался зайти на /delete/1
+2025-11-03 21:39:10,782 - INFO - Приложение запущено в debug=False
+2025-11-03 21:39:17,421 - ERROR - 403 Forbidden - User 'test' попытался зайти на /delete/1
+2025-11-03 21:42:06,484 - INFO - User 'test' вышел из системы
+2025-11-03 21:43:07,716 - INFO - Приложение запущено в debug=False
+2025-11-03 21:45:51,594 - INFO - Приложение запущено в debug=False
+2025-11-03 21:47:57,682 - INFO - User 'test' вошёл в систему
+2025-11-03 21:50:28,097 - INFO - Приложение запущено в debug=False
+2025-11-03 21:50:39,268 - INFO - User 'test' вышел из системы
+2025-11-03 21:50:53,291 - INFO - User 'test' вошёл в систему, IP=192.168.3.4
+2025-11-03 21:52:13,285 - INFO - User 'test' вошёл в систему, IP=192.168.3.6
+2025-11-03 21:54:17,972 - INFO - Приложение запущено в debug=False
+2025-11-03 21:54:45,540 - INFO - User 'test' вышел из системы
+2025-11-03 21:55:27,940 - INFO - Приложение запущено в debug=False
+2025-11-03 21:55:37,532 - INFO - User 'test' вошёл в систему, IP=192.168.3.4
+2025-11-03 21:56:09,282 - ERROR - 404 Not Found - User 'test' попытался зайти на /favicon.ico
+2025-11-03 21:56:58,013 - INFO - Приложение запущено в debug=False
+2025-11-03 21:57:47,472 - INFO - User 'test' удалил заметку 'de' (ID 13)
+2025-11-03 21:58:00,273 - INFO - User 'test' отредактировал заметку 'dd' (ID 14)
+2025-11-03 21:58:04,810 - INFO - User 'test' вышел из системы
+2025-11-03 21:58:45,544 - INFO - Приложение запущено в debug=False
+2025-11-03 21:58:59,643 - INFO - Приложение запущено в debug=False
+2025-11-03 21:59:21,290 - INFO - Приложение запущено в debug=False
+2025-11-03 21:59:22,400 - INFO - Приложение запущено в debug=False
+2025-11-03 22:06:45,561 - INFO - User 'test' вошёл в систему, IP=192.168.3.4
+2025-11-03 22:07:27,300 - INFO - User 'test' вошёл в систему, IP=127.0.0.1
+2025-11-03 22:09:55,360 - INFO - User 'test' вышел из системы
+2025-11-03 22:12:20,011 - INFO - Приложение запущено в debug=False
+2025-11-03 22:14:47,818 - INFO - Приложение запущено в debug=False
+2025-11-03 22:20:04,301 - INFO - Приложение запущено в debug=False
+2025-11-03 22:20:10,964 - INFO - User 'test' вошёл в систему, IP=127.0.0.1
+2025-11-03 22:20:20,585 - INFO - Приложение запущено в debug=False

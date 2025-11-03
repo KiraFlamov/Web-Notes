@@ -2,9 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- для мобильных устройств -->
     <title>Регистрация</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style_registr.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 
 <body>
@@ -12,7 +13,7 @@
     <!-- Форма для уведомлений -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="notification">{{ messages[0] }}</div>
+            <div class="notification">{{ messages[0] | e }}</div>
             <script>
                 const note = document.querySelector('.notification');
                 if (note) {
@@ -29,8 +30,8 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <input name="username" placeholder="Имя пользователя" required>
         <div class="password-row">
-            <input type="password" id="password" name="password" placeholder="Пароль" required>
-            <button type="button" class="toggle-password" onclick="togglePassword()">👁</button>
+            <input type="password" id="password" name="password" placeholder="Пароль" minlength="8" required>
+            <button type="button" class="toggle-password" onclick="togglePassword()">&#128065;</button>
         </div>
         <div class="buttons_row">
             <a href="{{ url_for('login') }}">Уже есть аккаунт? Войти</a>

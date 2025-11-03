@@ -2,19 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- для мобильных устройств -->
     <title>Редактировать</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <body>
     <h1>Редактировать заметку</h1>
-    <div class="container" style="display:block">
+    <div class="container_edit">
         <form method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <input type="text" name="title" value="{{ note.title }}" required>
             <textarea class="content-textarea" name="content" required>{{ note.content }}</textarea>
             <button type="submit">Сохранить</button>
         </form>
-
-
         <form action="{{ url_for('index') }}" method="get">
             <button type="submit">← Назад</button>
         </form>

@@ -2,9 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- для мобильных устройств -->
     <title>Заметки</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- подключаем css -->
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}"> <!-- иконка -->
 </head>
 
 <body>
@@ -13,7 +14,7 @@
     <!-- Форма для уведомлений -->
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="notification">{{ messages[0] }}</div>
+            <div class="notification">{{ messages[0] | e }}</div>
             <script>
                 const note = document.querySelector('.notification');
                 if (note) {
@@ -28,6 +29,7 @@
 
     <div class="container">
         <div class="left-panel">
+
             <!-- Форма для поиска -->
             <h3>Найти заметку:</h3>
             <form action="{{ url_for('search') }}" method="get">
@@ -35,12 +37,11 @@
                 <!--<button type="button" onclick="document.getElementById('search-input').value = '';">Очистить</button>*-->
                 <button type="submit" style="float: left";>Поиск</button>
             </form>
+            <br>
+            <br>
 
-            <br>
-            <br>
             <!-- Форма для добавления -->
             <h3>Добавить заметку:</h3>
-
             <form action="{{ url_for('add') }}" method="post">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <input type="text" name="title" placeholder="Заголовок" required>
@@ -48,7 +49,6 @@
                 <button type="submit">Добавить</button>
             </form>
         </div>
-
 
         <div class="right-panel">
 
@@ -63,8 +63,7 @@
 
             <!-- Список заметок -->
             {% if notes %}
-
-            <div class="sort-toggle">
+            <div class="sort-toggle"> <!-- отображение при сортировке -->
                 {% if search %}
                     {% if sort_order == "asc" %}
                         <a href="{{ url_for('search', query=query, sort='desc') }}">Сначала новые</a>
@@ -108,6 +107,7 @@
                 </div>
             {% else %}
                 {% if search %}
+                    <!-- ничего не делаем -->
                 {% else %}
                     <p>Заметок пока нет.</p>
                 {% endif %}
