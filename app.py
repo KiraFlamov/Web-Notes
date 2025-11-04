@@ -116,9 +116,7 @@ def search():
     sort_order = request.args.get("sort", "asc")  # добавляем параметр сортировки
 
     # фильтрация по заголовку и содержимому
-    notes = Note.query.filter(
-        (Note.title.ilike(f"%{query}%")) | (Note.content.ilike(f"%{query}%"))
-    )
+    notes = Note.query.filter_by(user_id=current_user.id).filter((Note.title.ilike(f"%{query}%")) | (Note.content.ilike(f"%{query}%")))
 
     # сортировка по дате
     if sort_order == "desc":
