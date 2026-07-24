@@ -48,3 +48,10 @@ cd Web-Notes
 
 pip install -r requirements.txt
 python app.py
+```
+
+---
+
+## Лицензия
+
+Проект распространяется под лицензией MIT. Подробнее — в файле [LICENSE](LICENSE).
