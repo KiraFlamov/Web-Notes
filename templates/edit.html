@@ -9,6 +9,23 @@
 </head>
 <body>
     <h1>Редактировать заметку</h1>
+
+    <!-- Форма для уведомлений -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">{{ messages[0] | e }}</div>
+            <script>
+                const note = document.querySelector('.notification');
+                if (note) {
+                    note.classList.add('show'); // делаем видимым
+                    setTimeout(() => {
+                      note.classList.remove('show'); // скрываем
+                    }, 1500); // через 1.5 секунды
+                }
+            </script>
+        {% endif %}
+    {% endwith %}
+
     <div class="container_edit">
         <form method="post">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">

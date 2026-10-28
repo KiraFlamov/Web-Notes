@@ -9,7 +9,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 app = Flask(__name__)
-app.secret_key = "secret_key_wow"
+# Секретный ключ берём из переменной окружения; если её нет — генерируем случайный (сессии сбросятся при перезапуске)
+app.secret_key = os.environ.get("SECRET_KEY") or os.urandom(32).hex()
 csrf = CSRFProtect(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///notes.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -30,7 +31,7 @@ if not os.path.exists('logs'):
 app.logger.setLevel(logging.INFO)
 
 # Настройка RotatingFileHandler — лог с ротацией, чтобы файл не рос бесконечно
-file_handler = RotatingFileHandler('logs/app.log', maxBytes=1024*1024, backupCount=3)
+file_handler = RotatingFileHandler('logs/app.log', maxBytes=1024*1024, backupCount=3, encoding='utf-8')
 file_handler.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 file_handler.setFormatter(formatter)
@@ -38,6 +39,8 @@ app.logger.addHandler(file_handler)
 
 # Логируем запуск приложения
 app.logger.info(f"Приложение запущено в debug={app.debug}")
+if not os.environ.get("SECRET_KEY"):
+    app.logger.warning("SECRET_KEY не задан — используется случайный ключ")
 
 
 class User(UserMixin, db.Model):
@@ -53,6 +56,21 @@ class Note(db.Model):
     updated = db.Column(db.String(50), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
+# Создаём таблицы, если базы ещё нет
+with app.app_context():
+    db.create_all()
+
+
+def validate_note(title, content):
+    """Проверка заметки на сервере. Возвращает текст ошибки или None."""
+    if not title:
+        return "Заголовок не может быть пустым"
+    if len(title) > 200:
+        return "Заголовок слишком длинный (максимум 200 символов)"
+    if not content:
+        return "Содержание не может быть пустым"
+    return None
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -67,8 +85,13 @@ def index():
 @app.route("/add", methods=["POST"])
 @login_required
 def add():
-    title = request.form.get("title")
-    content = request.form.get("content")
+    title = request.form.get("title", "").strip()
+    content = request.form.get("content", "").strip()
+    error = validate_note(title, content)
+    if error:
+        flash(error)
+        return redirect(url_for("index"))
+
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     new_note = Note(title=title, content=content, created=now, updated=now, user_id=current_user.id)
     db.session.add(new_note)
@@ -99,8 +122,15 @@ def edit(note_id):
         abort(403)
 
     if request.method == "POST":
-        note.title = request.form.get("title")
-        note.content = request.form.get("content")
+        title = request.form.get("title", "").strip()
+        content = request.form.get("content", "").strip()
+        error = validate_note(title, content)
+        if error:
+            flash(error)
+            return redirect(url_for("edit", note_id=note.id))
+
+        note.title = title
+        note.content = content
         note.updated = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         db.session.commit()
         flash("Заметка успешно сохранена!")
@@ -139,8 +169,16 @@ def search():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
+
+        # Проверка на сервере — HTML-атрибуты required/minlength легко обойти
+        if not username or len(username) > 100:
+            flash("Имя пользователя должно быть от 1 до 100 символов")
+            return redirect(url_for("register"))
+        if len(password) < 8:
+            flash("Пароль должен быть не короче 8 символов")
+            return redirect(url_for("register"))
 
         if User.query.filter_by(username=username).first():
             flash("Такой пользователь уже существует!")
@@ -159,8 +197,8 @@ def register():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username")
-        password = request.form.get("password")
+        username = request.form.get("username", "").strip()
+        password = request.form.get("password", "")
         user = User.query.filter_by(username=username).first()
 
         if not user or not check_password_hash(user.password, password):
@@ -206,10 +244,16 @@ def method_not_allowed(e):
 
 @app.errorhandler(500)
 def internal_error(e):
+    db.session.rollback()  # откатываем незавершённую транзакцию, чтобы сессия БД не осталась сломанной
     username = getattr(current_user, "username", "Anonymous")
     app.logger.error(f"500 Internal Server Error - User '{username}' вызвал ошибку на {request.path}: {str(e)}")
-    flash("Произошла внутренняя ошибка сервера. Попробуйте позже.")
-    return redirect(url_for("index"))
+    # Не редиректим на index: если ошибка в самом index, получится бесконечный цикл
+    return (
+        '<h1>Ошибка сервера</h1>'
+        '<p>Произошла внутренняя ошибка сервера. Попробуйте позже.</p>'
+        f'<a href="{url_for("index")}">На главную</a>',
+        500,
+    )
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0", port = 5000, debug=False)
